@@ -10,23 +10,33 @@
   "title",
   "start_date",
   "end_date",
+  "total_hours",
+  "duration",
   "customer",
-  "amended_from"
+  "column_break_mjcj",
+  "status",
+  "confirmation",
+  "paid_amount",
+  "mode_of_payment",
+  "receipt_number",
+  "section_break_mtur",
+  "items",
+  "totals",
+  "grand_total",
+  "repeat_tab",
+  "is_repeat_reservation",
+  "parent_reservation",
+  "section_break_gdwp",
+  "interval",
+  "column_break_rdia",
+  "count",
+  "section_break_owco",
+  "linked_reservations"
  ],
  "fields": [
   {
    "fieldname": "section_break_ye3n",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Reservation",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   },
   {
    "fieldname": "customer",
@@ -56,12 +66,133 @@
    "fieldtype": "Select",
    "label": "Series",
    "options": "RSV-.YYYY.-"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Reservation Item"
+  },
+  {
+   "fieldname": "column_break_mjcj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "confirmation",
+   "fieldname": "paid_amount",
+   "fieldtype": "Currency",
+   "label": "Paid Amount"
+  },
+  {
+   "fieldname": "section_break_mtur",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Duration",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "confirmation",
+   "fieldtype": "Check",
+   "label": "Confirmation"
+  },
+  {
+   "depends_on": "confirmation",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode of Payment",
+   "options": "Mode of Payment"
+  },
+  {
+   "depends_on": "confirmation",
+   "fieldname": "receipt_number",
+   "fieldtype": "Small Text",
+   "label": "Receipt Number"
+  },
+  {
+   "fieldname": "totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_hours",
+   "fieldtype": "Data",
+   "label": "Total Hours",
+   "read_only": 1
+  },
+  {
+   "default": "Unconfirmed",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nConfirmed\nUnconfirmed\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "interval",
+   "fieldtype": "Select",
+   "label": "Interval",
+   "options": "\nDaily\nWeekly\nMonthly"
+  },
+  {
+   "fieldname": "repeat_tab",
+   "fieldtype": "Tab Break",
+   "label": "Repeat"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_repeat_reservation",
+   "fieldtype": "Check",
+   "label": "Is Repeat Reservation"
+  },
+  {
+   "fieldname": "section_break_gdwp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_rdia",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "count",
+   "fieldtype": "Int",
+   "label": "Count"
+  },
+  {
+   "fieldname": "section_break_owco",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "linked_reservations",
+   "fieldtype": "Table",
+   "label": "Linked Reservations",
+   "options": "Reservation Repeat"
+  },
+  {
+   "fieldname": "parent_reservation",
+   "fieldtype": "Link",
+   "label": "Parent Reservation",
+   "options": "Reservation"
   }
  ],
- "index_web_pages_for_search": 1,
  "is_calendar_and_gantt": 1,
- "links": [],
- "modified": "2024-10-07 02:45:35.068798",
+ "links": [
+  {
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "custom_reservation"
+  }
+ ],
+ "modified": "2024-10-15 04:23:46.647794",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "Reservation",
@@ -76,13 +207,33 @@
    "print": 1,
    "read": 1,
    "report": 1,
+   "role": "Reservation Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   }
  ],
+ "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Green",
+   "title": "Paid"
+  }
+ ],
  "title_field": "title"
 }
